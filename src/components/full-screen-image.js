@@ -5,14 +5,44 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import RNFetchBlob from 'rn-fetch-blob';
+import {request_storage_runtime_permission, getExtention} from '../utils/utils';
 
 const Width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
 const FullScreen = props => {
+  const handleDownload = async () => {
+    await request_storage_runtime_permission();
+    var date = new Date();
+    var image_URL = props.uri;
+    var ext = getExtention(image_URL);
+    ext = '.' + ext[0].split('&')[0];
+    const {config, fs} = RNFetchBlob;
+    let PictureDir = fs.dirs.PictureDir;
+    let options = {
+      fileCache: true,
+      addAndroidDownloads: {
+        useDownloadManager: true,
+        notification: true,
+        path:
+          PictureDir +
+          '/image_' +
+          Math.floor(date.getTime() + date.getSeconds() / 2) +
+          ext,
+        description: 'Image',
+      },
+    };
+    config(options)
+      .fetch('GET', image_URL)
+      .then(res => {
+        Alert.alert('Image Downloaded Successfully.');
+      });
+  };
   return (
     <View style={styles.container}>
       <View>
@@ -22,7 +52,9 @@ const FullScreen = props => {
           <Ionicons name="ios-arrow-back" size={30} color="black" />
         </TouchableOpacity>
         <Image style={styles.imageStyle} source={{uri: props.uri}} />
-        <TouchableOpacity style={styles.downloadIcon}>
+        <TouchableOpacity
+          onPress={() => handleDownload()}
+          style={styles.downloadIcon}>
           <Entypo name="download" size={30} color="black" />
         </TouchableOpacity>
       </View>
