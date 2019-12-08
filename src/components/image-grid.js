@@ -16,7 +16,7 @@ const ImageComponent = props => {
     props.navigation.navigate('FullScreen', {uri: props.uri});
   };
   return (
-    <TouchableHighlight onPress={handleImage} style={styles.itemContainer}>
+    <TouchableHighlight style={styles.rowImageStyle} onPress={handleImage}>
       <Image style={styles.imageStyle} source={{uri: props.uri}} />
     </TouchableHighlight>
   );
@@ -24,14 +24,16 @@ const ImageComponent = props => {
 
 const ImageGrid = props => {
   return (
-    <FlatList
-      data={IMAGE_ARRAY}
-      renderItem={({item}) => (
-        <ImageComponent uri={item.uri} navigation={props.navigation} />
-      )}
-      keyExtractor={item => item.uri}
-      numColumns={2}
-    />
+    <View style={styles.itemContainer}>
+      <FlatList
+        data={IMAGE_ARRAY}
+        renderItem={({item}) => (
+          <ImageComponent uri={item.uri} navigation={props.navigation} />
+        )}
+        keyExtractor={item => item.uri}
+        numColumns={2}
+      />
+    </View>
   );
 };
 
@@ -43,8 +45,9 @@ const styles = StyleSheet.create({
     height: height,
   },
   itemContainer: {
-    margin: 15,
+    alignItems: 'center',
   },
+
   imageStyle: {
     width: 150,
     height: 200,
@@ -55,7 +58,8 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   rowImageStyle: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    marginRight: 10,
+    marginLeft: 10,
+    marginBottom: 10,
   },
 });
