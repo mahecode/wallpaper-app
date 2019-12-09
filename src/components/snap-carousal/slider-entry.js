@@ -68,11 +68,11 @@ export default class SliderEntry extends Component {
             even ? styles.imageContainerEven : {},
           ]}>
           {this.image}
-          <View
+          {/* <View
             style={[styles.radiusMask, even ? styles.radiusMaskEven : {}]}
-          />
+          /> */}
         </View>
-        <View
+        {/* <View
           style={[styles.textContainer, even ? styles.textContainerEven : {}]}>
           {uppercaseTitle}
           <Text
@@ -80,7 +80,7 @@ export default class SliderEntry extends Component {
             numberOfLines={2}>
             {subtitle}
           </Text>
-        </View>
+        </View> */}
       </TouchableOpacity>
     );
   }

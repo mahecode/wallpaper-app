@@ -40,7 +40,8 @@ const ENTRIES1 = [
 
 const SnapCarousal = () => {
   const _renderItem = ({item, index}) => {
-    return <SliderEntry data={item} even={(index + 1) % 2 === 0} />;
+    // return <SliderEntry data={item} even={(index + 1) % 2 === 0} />;
+    return <SliderEntry data={item} />;
   };
   return (
     <Carousel
