@@ -45,11 +45,11 @@ const styles = StyleSheet.create({
     height: height,
   },
   itemContainer: {
+    flex: 1,
     alignItems: 'center',
   },
-
   imageStyle: {
-    width: 150,
+    width: width / 2.5,
     height: 200,
     borderRadius: 25,
   },
