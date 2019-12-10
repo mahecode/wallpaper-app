@@ -1,4 +1,5 @@
-import {PermissionsAndroid, Alert} from 'react-native';
+import {PermissionsAndroid} from 'react-native';
+import {Toast} from '../components/toast';
 
 export async function request_storage_runtime_permission() {
   try {
@@ -11,9 +12,9 @@ export async function request_storage_runtime_permission() {
       },
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      Alert.alert('Storage Permission Granted.');
+      Toast({message: 'Storage Permission Granted.'});
     } else {
-      Alert.alert('Storage Permission Not Granted');
+      Toast({message: 'Storage Permission Not Granted'});
     }
   } catch (err) {
     console.warn(err);

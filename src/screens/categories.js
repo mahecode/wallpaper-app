@@ -1,11 +1,19 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, FlatList} from 'react-native';
 import {categoryArray} from '../utils/constants';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Category = props => {
   return (
     <View style={styles.innerContainer}>
-      <Image style={styles.imageStyle} source={{uri: props.uri}} />
+      <TouchableOpacity
+        onPress={() =>
+          props.navigation.navigate('Categorized Wallpaper', {
+            query: props.name,
+          })
+        }>
+        <Image style={styles.imageStyle} source={{uri: props.uri}} />
+      </TouchableOpacity>
       <View style={styles.textStyle}>
         <Text style={styles.text}>{props.name}</Text>
       </View>
@@ -13,13 +21,19 @@ const Category = props => {
   );
 };
 
-const Categories = () => {
+const Categories = props => {
   return (
     <View style={styles.container}>
       <View style={styles.gridStyle}>
         <FlatList
           data={categoryArray}
-          renderItem={({item}) => <Category uri={item.uri} name={item.name} />}
+          renderItem={({item}) => (
+            <Category
+              navigation={props.navigation}
+              uri={item.uri}
+              name={item.name}
+            />
+          )}
           keyExtractor={item => item.name}
           numColumns={3}
         />
