@@ -14,13 +14,17 @@ import {useStateValue} from '../store/reducer';
 import {
   getTrendingWallpapers,
   getCategorizedWallpaper,
+  getSearchResult,
 } from '../utils/fetch-api';
 import {
   SET_MORE_TRENDING_WALLPAPERS,
   SET_TRENDING_WALLPAPERS,
   SET_MORE_CATEGORY_WALLPAPERS,
+  SET_SEARCH_WALLPAPERS,
+  SET_MORE_SEARCH_WALLPAPERS,
 } from '../store/state';
 import {CustomAlert} from './custom-alert';
+import {Toast} from './toast';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -46,22 +50,35 @@ const ImageComponent = props => {
 };
 
 const ImageGrid = props => {
-  const [
-    {trendingWallpapers, categorizedWallpapers},
-    dispatch,
-  ] = useStateValue();
+  const [loading, setLoading] = React.useState(false);
+  const [{}, dispatch] = useStateValue();
+
   const handleNewData = () => {
     if (props.query) {
       getCategorizedWallpaper(props.query).then(res => {
-        if (res.error) return CustomAlert({title: 'Error', message: res.error});
+        setLoading(true);
+        if (res.error) return Toast({message: res.error});
         dispatch({
           type: SET_MORE_CATEGORY_WALLPAPERS,
           categorizedWallpapers: res,
         });
+        setLoading(false);
       });
-    } else {
+    }
+
+    if (props.searchQuery) {
+      console.log(props.searchQuery);
+      getSearchResult(props.searchQuery).then(res => {
+        setLoading(true);
+        if (res.error) return Toast({message: res.error});
+        dispatch({type: SET_MORE_SEARCH_WALLPAPERS, searchWallpapers: res});
+        setLoading(false);
+      });
+    }
+
+    if (props.trend) {
       getTrendingWallpapers().then(res => {
-        if (res.error) return console.log('error');
+        if (res.error) return Toast({message: res.error});
         dispatch({type: SET_MORE_TRENDING_WALLPAPERS, trendingWallpapers: res});
       });
     }
@@ -69,6 +86,7 @@ const ImageGrid = props => {
 
   return (
     <View style={styles.itemContainer}>
+      {loading && <ActivityIndicator size={38} color="blue" />}
       <FlatList
         data={props.trendingWallpapers.photos}
         renderItem={({item}) => (

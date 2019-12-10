@@ -30,10 +30,11 @@ const Trending = props => {
 
   return (
     <>
-      <SearchBar />
+      <SearchBar navigation={props.navigation} />
       {loading && <ActivityIndicator color="blue" size={38} />}
       {Object.keys(trendingWallpapers).length !== 0 && (
         <ImageGrid
+          trend={true}
           trendingWallpapers={trendingWallpapers}
           navigation={props.navigation}
         />
