@@ -21,13 +21,15 @@ const Search = props => {
 
   React.useEffect(() => {
     setLoading(true);
-    if (query) {
+    if (query !== '') {
       getSearchResult(query).then(res => {
         setLoading(true);
         if (res.error) return Toast({message: res.error});
         dispatch({type: SET_SEARCH_WALLPAPERS, searchWallpapers: res});
         setLoading(false);
       });
+    } else {
+      setLoading(false);
     }
   }, [dispatch, query]);
 

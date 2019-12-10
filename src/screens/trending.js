@@ -17,8 +17,8 @@ const Trending = props => {
   const [{trendingWallpapers}, dispatch] = useStateValue();
 
   React.useEffect(() => {
+    setLoading(true);
     getTrendingWallpapers().then(res => {
-      setLoading(true);
       if (res.error) return console.log('error');
       dispatch({
         type: SET_TRENDING_WALLPAPERS,
