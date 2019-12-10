@@ -11,8 +11,16 @@ import {
 import {IMAGE_ARRAY} from '../utils/constants';
 import {WallpaperImage} from './wallpaper-image';
 import {useStateValue} from '../store/reducer';
-import {getTrendingWallpapers} from '../utils/fetch-api';
-import {SET_MORE_TRENDING_WALLPAPERS, SET_TRENDING_WALLPAPERS} from '../store/state';
+import {
+  getTrendingWallpapers,
+  getCategorizedWallpaper,
+} from '../utils/fetch-api';
+import {
+  SET_MORE_TRENDING_WALLPAPERS,
+  SET_TRENDING_WALLPAPERS,
+  SET_MORE_CATEGORY_WALLPAPERS,
+} from '../store/state';
+import {CustomAlert} from './custom-alert';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -38,12 +46,25 @@ const ImageComponent = props => {
 };
 
 const ImageGrid = props => {
-  const [{trendingWallpapers}, dispatch] = useStateValue();
+  const [
+    {trendingWallpapers, categorizedWallpapers},
+    dispatch,
+  ] = useStateValue();
   const handleNewData = () => {
-    getTrendingWallpapers().then(res => {
-      if (res.error) return console.log('error');
-      dispatch({type: SET_MORE_TRENDING_WALLPAPERS, trendingWallpapers: res});
-    });
+    if (props.query) {
+      getCategorizedWallpaper(props.query).then(res => {
+        if (res.error) return CustomAlert({title: 'Error', message: res.error});
+        dispatch({
+          type: SET_MORE_CATEGORY_WALLPAPERS,
+          categorizedWallpapers: res,
+        });
+      });
+    } else {
+      getTrendingWallpapers().then(res => {
+        if (res.error) return console.log('error');
+        dispatch({type: SET_MORE_TRENDING_WALLPAPERS, trendingWallpapers: res});
+      });
+    }
   };
 
   return (

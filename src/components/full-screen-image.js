@@ -12,6 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import RNFetchBlob from 'rn-fetch-blob';
 import {request_storage_runtime_permission, getExtention} from '../utils/utils';
+import {Toast} from '../components/toast';
 
 const Width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
@@ -42,7 +43,7 @@ const FullScreen = props => {
     config(options)
       .fetch('GET', image_URL)
       .then(res => {
-        Alert.alert('Image Downloaded Successfully.');
+        Toast({message: 'Image Downloaded Successfully.'});
       });
   };
 

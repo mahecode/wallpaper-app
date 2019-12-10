@@ -6,6 +6,7 @@ import {createAppContainer} from 'react-navigation';
 import FullScreen from './screens/full-screen';
 import CategoriesScreen from './screens/categories';
 import AboutScreen from './screens/About';
+import CategoryWallpaperScreen from './screens/category-wallpapers';
 import CustomBottomTabNavigator from './components/bottom-tab-navigator';
 
 const BottomTabNavigator = createBottomTabNavigator(
@@ -24,6 +25,7 @@ const StackNavigator = createStackNavigator(
   {
     BottomTabNavigator,
     FullScreen,
+    'Categorized Wallpaper': CategoryWallpaperScreen,
   },
   {
     headerMode: 'none',
