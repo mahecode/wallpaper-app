@@ -10,7 +10,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Width = Dimensions.get('screen').width;
 
-const SearchBar = () => {
+const SearchBar = props => {
+  const handleSearch = query => {
+    props.navigation.navigate('Search', {query});
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -18,7 +22,11 @@ const SearchBar = () => {
           <FontAwesome name="align-left" size={32} color="#414141" />
         </TouchableOpacity>
         <View style={styles.textInputContainer}>
-          <TextInput style={styles.textInput} />
+          <TextInput
+            onSubmitEditing={e => handleSearch(e.nativeEvent.text)}
+            placeholder="Search"
+            style={styles.textInput}
+          />
         </View>
       </View>
     </View>
@@ -43,6 +51,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     height: 50,
     backgroundColor: '#E6E6E6',
+    paddingHorizontal: 20,
+    borderWidth: 2,
   },
   textInputContainer: {
     flexDirection: 'row',

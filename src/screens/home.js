@@ -4,10 +4,9 @@ import SearchBar from '../components/search-bar';
 import SnapCarousal from '../components/snap-carousal/snap-carousal';
 import {getWallpapers} from '../utils/fetch-api';
 import {useStateValue} from '../store/reducer';
-import {SET_WALLPAPERS} from '../store/state'
+import {SET_WALLPAPERS} from '../store/state';
 
 const Home = props => {
-  // const [wallpapers, setWallpapers] = useState({});
   const [loading, setLoading] = useState(false);
   const [{wallpapers}, dispatch] = useStateValue();
   useEffect(() => {
@@ -15,15 +14,15 @@ const Home = props => {
     getWallpapers().then(res => {
       console.log('in useEffect');
       if (res.error) return Alert.alert('Error', res.error);
-      dispatch({type: SET_WALLPAPERS, wallpapers: res, size: res.per_page});
+      dispatch({type: SET_WALLPAPERS, wallpapers: res});
       setLoading(false);
     });
   }, [dispatch]);
   return (
     <ScrollView style={{flex: 1}}>
-      <SearchBar />
+      {/* <SearchBar navigation={props.navigation} /> */}
       {loading && <ActivityIndicator color="blue" size={48} />}
-      {wallpapers && (
+      {Object.keys(wallpapers).length !== 0 && (
         <View>
           <SnapCarousal
             photos={wallpapers.photos}

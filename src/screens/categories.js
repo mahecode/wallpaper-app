@@ -4,20 +4,28 @@ import {categoryArray} from '../utils/constants';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Category = props => {
+  const [loading, setLoading] = React.useState(false);
+
   return (
-    <View style={styles.innerContainer}>
-      <TouchableOpacity
-        onPress={() =>
-          props.navigation.navigate('Categorized Wallpaper', {
-            query: props.name,
-          })
-        }>
-        <Image style={styles.imageStyle} source={{uri: props.uri}} />
-      </TouchableOpacity>
+    <TouchableOpacity
+      onPress={() =>
+        props.navigation.navigate('Categorized Wallpaper', {
+          query: props.name,
+        })
+      }
+      style={styles.innerContainer}>
+      <View>
+        <Image
+          style={loading ? styles.loadingStyle : styles.imageStyle}
+          source={{uri: props.uri}}
+          onLoadStart={() => setLoading(true)}
+          onLoadEnd={() => setLoading(false)}
+        />
+      </View>
       <View style={styles.textStyle}>
         <Text style={styles.text}>{props.name}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -62,6 +70,12 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
+  },
+  loadingStyle: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: 'gray',
   },
   gridStyle: {
     alignContent: 'space-between',

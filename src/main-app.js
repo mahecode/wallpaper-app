@@ -7,6 +7,7 @@ import FullScreen from './screens/full-screen';
 import CategoriesScreen from './screens/categories';
 import AboutScreen from './screens/About';
 import CategoryWallpaperScreen from './screens/category-wallpapers';
+import SearchScreen from './screens/search';
 import CustomBottomTabNavigator from './components/bottom-tab-navigator';
 
 const BottomTabNavigator = createBottomTabNavigator(
@@ -26,6 +27,7 @@ const StackNavigator = createStackNavigator(
     BottomTabNavigator,
     FullScreen,
     'Categorized Wallpaper': CategoryWallpaperScreen,
+    Search: SearchScreen,
   },
   {
     headerMode: 'none',
