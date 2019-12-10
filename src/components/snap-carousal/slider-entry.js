@@ -1,10 +1,26 @@
 import React, {Component} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import {ParallaxImage} from 'react-native-snap-carousel';
 import styles from './slider-entry.style';
+import {StateContext} from '../../store/reducer';
+import {ADD_WALLPAPERS} from '../../store/state';
+import {getWallpapers} from '../../utils/fetch-api';
 
 export default class SliderEntry extends Component {
+  static contextType = StateContext;
+
+  state = {
+    loading: false,
+  };
+
   static propTypes = {
     data: PropTypes.object.isRequired,
     even: PropTypes.bool,
@@ -14,15 +30,16 @@ export default class SliderEntry extends Component {
 
   get image() {
     const {
-      data: {illustration},
       parallax,
       parallaxProps,
       even,
+      data: {src},
+      index,
+      page,
     } = this.props;
-
     return parallax ? (
       <ParallaxImage
-        source={{uri: illustration}}
+        source={{uri: src.medium}}
         containerStyle={[
           styles.imageContainer,
           even ? styles.imageContainerEven : {},
@@ -34,13 +51,18 @@ export default class SliderEntry extends Component {
         {...parallaxProps}
       />
     ) : (
-      <Image source={{uri: illustration}} style={styles.image} />
+      <Image
+        source={{uri: src.large}}
+        style={styles.image}
+        onLoadStart={() => this.setState({loading: true})}
+        onLoadEnd={() => this.setState({loading: false})}
+      />
     );
   }
 
   render() {
     const {
-      data: {title, subtitle},
+      data: {title, subtitle, src},
       even,
     } = this.props;
 
@@ -58,9 +80,9 @@ export default class SliderEntry extends Component {
       <TouchableOpacity
         activeOpacity={1}
         style={styles.slideInnerContainer}
-        onPress={() => {
-          alert(`You've clicked '${title}'`);
-        }}>
+        onPress={() =>
+          this.props.navigation.navigate('FullScreen', {uri: src.original})
+        }>
         <View style={styles.shadow} />
         <View
           style={[
@@ -68,6 +90,7 @@ export default class SliderEntry extends Component {
             even ? styles.imageContainerEven : {},
           ]}>
           {this.image}
+          {this.state.loading && <ActivityIndicator color="blue" size={32} />}
           {/* <View
             style={[styles.radiusMask, even ? styles.radiusMaskEven : {}]}
           /> */}

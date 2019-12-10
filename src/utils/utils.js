@@ -23,3 +23,7 @@ export async function request_storage_runtime_permission() {
 export const getExtention = filename => {
   return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
 };
+
+export const getRandomInt = max => {
+  return Math.floor(Math.random() * Math.floor(max));
+};

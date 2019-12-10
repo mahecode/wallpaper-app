@@ -1,3 +1,8 @@
+export const PEXELS_API_SECRET =
+  '563492ad6f917000010000016f3c420578bb422793fed13b1c5ef42c';
+
+export const API_URL = 'https://api.pexels.com/v1';
+
 export const IMAGE_ARRAY = [
   {
     uri:
