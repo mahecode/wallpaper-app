@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -16,6 +17,7 @@ const Width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
 const FullScreen = props => {
+  const [loading, setLoading] = React.useState(false);
   const handleDownload = async () => {
     await request_storage_runtime_permission();
     var date = new Date();
@@ -43,20 +45,35 @@ const FullScreen = props => {
         Alert.alert('Image Downloaded Successfully.');
       });
   };
+
   return (
     <View style={styles.container}>
       <View>
-        <TouchableOpacity
-          onPress={() => props.goBack()}
-          style={styles.iconContainer}>
-          <Ionicons name="ios-arrow-back" size={30} color="black" />
-        </TouchableOpacity>
-        <Image style={styles.imageStyle} source={{uri: props.uri}} />
-        <TouchableOpacity
-          onPress={() => handleDownload()}
-          style={styles.downloadIcon}>
-          <Entypo name="download" size={30} color="black" />
-        </TouchableOpacity>
+        {!loading && (
+          <TouchableOpacity
+            onPress={() => props.goBack()}
+            style={styles.iconContainer}>
+            <Ionicons name="ios-arrow-back" size={30} color="black" />
+          </TouchableOpacity>
+        )}
+        {loading && (
+          <View style={styles.activityIndicator}>
+            <ActivityIndicator color="blue" size={42} />
+          </View>
+        )}
+        <Image
+          style={styles.imageStyle}
+          source={{uri: props.uri}}
+          onLoadStart={() => setLoading(true)}
+          onLoadEnd={() => setLoading(false)}
+        />
+        {!loading && (
+          <TouchableOpacity
+            onPress={() => handleDownload()}
+            style={styles.downloadIcon}>
+            <Entypo name="download" size={30} color="black" />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -98,5 +115,11 @@ const styles = StyleSheet.create({
     right: Width / 20,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 50,
   },
 });
