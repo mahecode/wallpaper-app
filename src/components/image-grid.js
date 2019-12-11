@@ -23,29 +23,43 @@ import {Toast} from './toast';
 
 const {width, height} = Dimensions.get('screen');
 
-const ImageComponent = props => {
-  const [loading, setLoading] = React.useState(false);
+class ImageComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      loading: false,
+    };
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    const {navigation} = this.props;
+    return navigation !== nextProps.navigation;
+  }
 
-  const handleImage = () => {
-    props.navigation.navigate('FullScreen', {
-      uri: props.large,
-      original: props.original,
+  handleImage = () => {
+    this.props.navigation.navigate('FullScreen', {
+      uri: this.props.large,
+      original: this.props.original,
     });
   };
 
-  return (
-    <View>
-      <TouchableHighlight style={styles.rowImageStyle} onPress={handleImage}>
-        <Image
-          style={loading ? styles.loadingImage : styles.imageStyle}
-          source={{uri: props.uri}}
-          onLoadStart={() => setLoading(true)}
-          onLoadEnd={() => setLoading(false)}
-        />
-      </TouchableHighlight>
-    </View>
-  );
-};
+  render() {
+    const {loading} = this.state;
+    return (
+      <View>
+        <TouchableHighlight
+          style={styles.rowImageStyle}
+          onPress={this.handleImage}>
+          <Image
+            style={loading ? styles.loadingImage : styles.imageStyle}
+            source={{uri: this.props.uri}}
+            onLoadStart={() => this.setState({loading: true})}
+            onLoadEnd={() => this.setState({loading: false})}
+          />
+        </TouchableHighlight>
+      </View>
+    );
+  }
+}
 
 const ImageGrid = props => {
   const [loadMore, setLoadMore] = React.useState(false);
