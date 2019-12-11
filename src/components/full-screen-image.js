@@ -5,7 +5,6 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  Alert,
   ActivityIndicator,
   StatusBar,
 } from 'react-native';
@@ -59,11 +58,11 @@ const FullScreen = props => {
             <Ionicons name="ios-arrow-back" size={30} color="black" />
           </TouchableOpacity>
         )}
-        {loading && (
+        {/* {loading && (
           <View style={styles.activityIndicator}>
             <ActivityIndicator color="blue" size={42} />
           </View>
-        )}
+        )} */}
         <Image
           style={styles.imageStyle}
           source={{uri: props.uri}}

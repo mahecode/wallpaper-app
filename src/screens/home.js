@@ -11,12 +11,13 @@ const Home = props => {
   const [{wallpapers}, dispatch] = useStateValue();
   useEffect(() => {
     setLoading(true);
-    getWallpapers().then(res => {
-      console.log('in useEffect');
-      if (res.error) return Alert.alert('Error', res.error);
-      dispatch({type: SET_WALLPAPERS, wallpapers: res});
-      setLoading(false);
-    });
+    getWallpapers()
+      .then(res => {
+        console.log('in useEffect');
+        if (res.error) return Alert.alert('Error', res.error);
+        dispatch({type: SET_WALLPAPERS, wallpapers: res});
+      })
+      .then(res => setLoading(false));
   }, [dispatch]);
   return (
     <ScrollView style={{flex: 1}}>

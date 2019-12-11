@@ -5,14 +5,11 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {ParallaxImage} from 'react-native-snap-carousel';
 import styles from './slider-entry.style';
 import {StateContext} from '../../store/reducer';
-import {ADD_WALLPAPERS} from '../../store/state';
-import {getWallpapers} from '../../utils/fetch-api';
 
 export default class SliderEntry extends Component {
   static contextType = StateContext;
