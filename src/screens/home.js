@@ -20,7 +20,7 @@ const Home = props => {
   }, [dispatch]);
   return (
     <ScrollView style={{flex: 1}}>
-      {/* <SearchBar navigation={props.navigation} /> */}
+      <SearchBar navigation={props.navigation} />
       {loading && <ActivityIndicator color="blue" size={48} />}
       {Object.keys(wallpapers).length !== 0 && (
         <View>

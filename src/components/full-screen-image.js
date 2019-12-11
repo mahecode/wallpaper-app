@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
+  StatusBar,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -49,6 +50,7 @@ const FullScreen = props => {
 
   return (
     <View style={styles.container}>
+      <StatusBar hidden={true} animated />
       <View>
         {!loading && (
           <TouchableOpacity
