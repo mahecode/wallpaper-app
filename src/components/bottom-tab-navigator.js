@@ -18,7 +18,7 @@ const CustomBottomTabNavigator = props => {
           navigation={props.navigation}
         />
         <BottomTab
-          iconName="leaf"
+          iconName="archive"
           tabName="Categories"
           navigation={props.navigation}
         />

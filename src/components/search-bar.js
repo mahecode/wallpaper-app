@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {View, StyleSheet, Dimensions, TextInput, Image} from 'react-native';
 
 const Width = Dimensions.get('screen').width;
 
@@ -18,9 +11,9 @@ const SearchBar = props => {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <TouchableOpacity>
-          <FontAwesome name="align-left" size={32} color="#414141" />
-        </TouchableOpacity>
+        <Image
+          source={require('../../android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png')}
+        />
         <View style={styles.textInputContainer}>
           <TextInput
             onSubmitEditing={e => handleSearch(e.nativeEvent.text)}
