@@ -23,7 +23,7 @@ const FullScreen = props => {
   const handleDownload = async () => {
     await request_storage_runtime_permission();
     var date = new Date();
-    var image_URL = props.uri;
+    var image_URL = props.original;
     var ext = getExtention(image_URL);
     ext = '.' + ext[0].split('&')[0];
     const {config, fs} = RNFetchBlob;

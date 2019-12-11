@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
   },
   gridStyle: {
     alignContent: 'space-between',
-    paddingTop: 20,
   },
   textStyle: {
     position: 'absolute',

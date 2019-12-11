@@ -8,8 +8,6 @@ import {
   TouchableHighlight,
   ActivityIndicator,
 } from 'react-native';
-import {IMAGE_ARRAY} from '../utils/constants';
-import {WallpaperImage} from './wallpaper-image';
 import {useStateValue} from '../store/reducer';
 import {
   getTrendingWallpapers,
@@ -18,12 +16,9 @@ import {
 } from '../utils/fetch-api';
 import {
   SET_MORE_TRENDING_WALLPAPERS,
-  SET_TRENDING_WALLPAPERS,
   SET_MORE_CATEGORY_WALLPAPERS,
-  SET_SEARCH_WALLPAPERS,
   SET_MORE_SEARCH_WALLPAPERS,
 } from '../store/state';
-import {CustomAlert} from './custom-alert';
 import {Toast} from './toast';
 
 const {width, height} = Dimensions.get('screen');
@@ -32,7 +27,10 @@ const ImageComponent = props => {
   const [loading, setLoading] = React.useState(false);
 
   const handleImage = () => {
-    props.navigation.navigate('FullScreen', {uri: props.original});
+    props.navigation.navigate('FullScreen', {
+      uri: props.large,
+      original: props.original,
+    });
   };
 
   return (
@@ -50,48 +48,55 @@ const ImageComponent = props => {
 };
 
 const ImageGrid = props => {
-  const [loading, setLoading] = React.useState(false);
+  const [loadMore, setLoadMore] = React.useState(false);
   const [{}, dispatch] = useStateValue();
 
   const handleNewData = () => {
     if (props.query) {
-      getCategorizedWallpaper(props.query).then(res => {
-        setLoading(true);
-        if (res.error) return Toast({message: res.error});
-        dispatch({
-          type: SET_MORE_CATEGORY_WALLPAPERS,
-          categorizedWallpapers: res,
-        });
-        setLoading(false);
-      });
+      setLoadMore(true);
+      getCategorizedWallpaper(props.query)
+        .then(res => {
+          if (res.error) return Toast({message: res.error});
+          dispatch({
+            type: SET_MORE_CATEGORY_WALLPAPERS,
+            categorizedWallpapers: res,
+          });
+        })
+        .then(res => setLoadMore(false));
     }
 
     if (props.searchQuery) {
-      console.log(props.searchQuery);
-      getSearchResult(props.searchQuery).then(res => {
-        setLoading(true);
-        if (res.error) return Toast({message: res.error});
-        dispatch({type: SET_MORE_SEARCH_WALLPAPERS, searchWallpapers: res});
-        setLoading(false);
-      });
+      setLoadMore(true);
+      getSearchResult(props.searchQuery)
+        .then(res => {
+          if (res.error) return Toast({message: res.error});
+          dispatch({type: SET_MORE_SEARCH_WALLPAPERS, searchWallpapers: res});
+        })
+        .then(res => setLoadMore(false));
     }
 
     if (props.trend) {
-      getTrendingWallpapers().then(res => {
-        if (res.error) return Toast({message: res.error});
-        dispatch({type: SET_MORE_TRENDING_WALLPAPERS, trendingWallpapers: res});
-      });
+      setLoadMore(true);
+      getTrendingWallpapers()
+        .then(res => {
+          if (res.error) return Toast({message: res.error});
+          dispatch({
+            type: SET_MORE_TRENDING_WALLPAPERS,
+            trendingWallpapers: res,
+          });
+        })
+        .then(res => setLoadMore(false));
     }
   };
 
   return (
     <View style={styles.itemContainer}>
-      {loading && <ActivityIndicator size={38} color="blue" />}
       <FlatList
         data={props.trendingWallpapers.photos}
         renderItem={({item}) => (
           <ImageComponent
             uri={item.src.medium}
+            large={item.src.large}
             original={item.src.original}
             navigation={props.navigation}
           />
@@ -101,6 +106,7 @@ const ImageGrid = props => {
         onEndReached={handleNewData}
         onEndReachedThreshold={0.5}
       />
+      {loadMore && <ActivityIndicator size={38} color="blue" />}
     </View>
   );
 };

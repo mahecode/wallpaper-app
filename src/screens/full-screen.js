@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import FullScreenImage from '../components/full-screen-image';
 
 const FullScreen = props => {
@@ -7,6 +6,7 @@ const FullScreen = props => {
     <FullScreenImage
       goBack={props.navigation.goBack}
       uri={props.navigation.state.params.uri}
+      original={props.navigation.state.params.original}
     />
   );
 };

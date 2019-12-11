@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {View, StyleSheet} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import SliderEntry from './slider-entry';
 import {sliderWidth, itemWidth} from './slider-entry.style';
@@ -16,9 +15,6 @@ const SnapCarousal = props => {
         navigation={props.navigation}
       />
     );
-    // return (
-    //   <SliderEntry data={item} index={index} navigation={props.navigation} />
-    // );
   };
 
   return (
