@@ -12,7 +12,8 @@ const SearchBar = props => {
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <Image
-          source={require('../../android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png')}
+          source={require('../../android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png')}
+          style={styles.iconStyle}
         />
         <View style={styles.textInputContainer}>
           <TextInput
@@ -53,7 +54,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   iconStyle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    height: 50,
+    width: 50,
+    borderRadius: 50,
   },
 });

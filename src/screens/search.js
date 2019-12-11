@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import {getSearchResult} from '../utils/fetch-api';
 import {Toast} from '../components/toast';
 import {useStateValue} from '../store/reducer';
@@ -20,14 +20,16 @@ const Search = props => {
   const [{searchWallpapers}, dispatch] = useStateValue();
 
   React.useEffect(() => {
+    dispatch({type: SET_SEARCH_WALLPAPERS, searchWallpapers: {}});
     setLoading(true);
     if (query !== '') {
-      getSearchResult(query).then(res => {
-        setLoading(true);
-        if (res.error) return Toast({message: res.error});
-        dispatch({type: SET_SEARCH_WALLPAPERS, searchWallpapers: res});
-        setLoading(false);
-      });
+      getSearchResult(query)
+        .then(res => {
+          setLoading(true);
+          if (res.error) return Toast({message: res.error});
+          dispatch({type: SET_SEARCH_WALLPAPERS, searchWallpapers: res});
+        })
+        .then(res => setLoading(false));
     } else {
       setLoading(false);
     }

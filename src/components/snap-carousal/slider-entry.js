@@ -34,8 +34,6 @@ export default class SliderEntry extends Component {
       parallaxProps,
       even,
       data: {src},
-      index,
-      page,
     } = this.props;
     return parallax ? (
       <ParallaxImage
@@ -81,7 +79,10 @@ export default class SliderEntry extends Component {
         activeOpacity={1}
         style={styles.slideInnerContainer}
         onPress={() =>
-          this.props.navigation.navigate('FullScreen', {uri: src.original})
+          this.props.navigation.navigate('FullScreen', {
+            uri: src.large,
+            original: src.original,
+          })
         }>
         <View style={styles.shadow} />
         <View
