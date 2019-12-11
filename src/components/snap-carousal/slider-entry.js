@@ -52,7 +52,7 @@ export default class SliderEntry extends Component {
       />
     ) : (
       <Image
-        source={{uri: src.large}}
+        source={{uri: src.medium}}
         style={styles.image}
         onLoadStart={() => this.setState({loading: true})}
         onLoadEnd={() => this.setState({loading: false})}
