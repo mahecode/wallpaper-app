@@ -7,56 +7,7 @@ export const PRIVACY_POLICY_URL =
 export const TERMS_AND_CONDITIONS_URL =
   'https://shrouded-bastion-09819.herokuapp.com/terms-and-conditions-wallpapers';
 
-export const IMAGE_ARRAY = [
-  {
-    uri:
-      'https://images.pexels.com/photos/3224164/pexels-photo-3224164.jpeg?cs=srgb&dl=photo-of-christmas-balls-3224164.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3250362/pexels-photo-3250362.jpeg?cs=srgb&dl=low-angle-shot-of-a-person-swinging-on-a-rope-tied-to-3250362.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3250362/pexels-photo-3250362.jpeg?cs=srgb&dl=low-angle-shot-of-a-person-swinging-on-a-rope-tied-to-3250362.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3325720/pexels-photo-3325720.jpeg?cs=srgb&dl=person-walking-on-street-3325720.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3325720/pexels-photo-3325720.jpeg?cs=srgb&dl=person-walking-on-street-3325720.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3325720/pexels-photo-3325720.jpeg?cs=srgb&dl=person-walking-on-street-3325720.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3224164/pexels-photo-3224164.jpeg?cs=srgb&dl=photo-of-christmas-balls-3224164.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3250362/pexels-photo-3250362.jpeg?cs=srgb&dl=low-angle-shot-of-a-person-swinging-on-a-rope-tied-to-3250362.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3250362/pexels-photo-3250362.jpeg?cs=srgb&dl=low-angle-shot-of-a-person-swinging-on-a-rope-tied-to-3250362.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3325720/pexels-photo-3325720.jpeg?cs=srgb&dl=person-walking-on-street-3325720.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3325720/pexels-photo-3325720.jpeg?cs=srgb&dl=person-walking-on-street-3325720.jpg&fm=jpg',
-  },
-  {
-    uri:
-      'https://images.pexels.com/photos/3325720/pexels-photo-3325720.jpeg?cs=srgb&dl=person-walking-on-street-3325720.jpg&fm=jpg',
-  },
-];
+export const ICON_COLOR = '#838383';
 
 export const categoryArray = [
   {
