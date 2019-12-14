@@ -1,7 +1,8 @@
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity, Linking} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {ICON_COLOR} from '../utils/constants';
+import {ICON_COLOR, SHARE_MESSAGE} from '../utils/constants';
+import {ShareApp} from '../components/share-app';
 
 const List = props => {
   const handleListItem = () => {
@@ -10,6 +11,9 @@ const List = props => {
     }
     if (props.navigation) {
       props.navigation.navigate('Info');
+    }
+    if (props.shareType) {
+      ShareApp({message: SHARE_MESSAGE});
     }
   };
 
@@ -28,7 +32,7 @@ const List = props => {
 const styles = StyleSheet.create({
   list: {
     height: 60,
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     borderColor: ICON_COLOR,
     marginHorizontal: 20,
     alignItems: 'center',

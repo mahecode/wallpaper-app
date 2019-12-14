@@ -29,6 +29,9 @@
         android:exported="true">
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+       <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7717739132786706~9665445682"/>
     </application>
 
 </manifest>

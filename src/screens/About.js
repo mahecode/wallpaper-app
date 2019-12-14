@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import List from '../components/list';
 import {PRIVACY_POLICY_URL, TERMS_AND_CONDITIONS_URL} from '../utils/constants';
+import Admob from '../components/admob';
 
 const About = props => {
   return (
@@ -21,11 +22,14 @@ const About = props => {
         iconName="cash-register"
         url={TERMS_AND_CONDITIONS_URL}
       />
-       <List
+      <List
         listName="Invite your friends"
         iconName="share-variant"
-        url={TERMS_AND_CONDITIONS_URL}
+        shareType={true}
       />
+      <View style={styles.admob}>
+        <Admob />
+      </View>
     </View>
   );
 };
@@ -34,6 +38,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginVertical: 20,
+  },
+  admob: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
 });
 
