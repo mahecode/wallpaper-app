@@ -8,6 +8,10 @@ export const TERMS_AND_CONDITIONS_URL =
   'https://shrouded-bastion-09819.herokuapp.com/terms-and-conditions-wallpapers';
 
 export const ICON_COLOR = '#838383';
+export const ADMOB_APP_ID = 'ca-app-pub-7717739132786706~9665445682';
+export const ADMOB_AD_ID = 'ca-app-pub-7717739132786706/5826767868';
+export const SHARE_MESSAGE =
+  'Hey, \n\n Checkout this dope wallpaper app which provides some cool blur HD wallpapers which you will definitely love it. So please give a try here is the link \n\n https://play.google.com/store/apps/details?id=com.mahecodewallpaper';
 
 export const categoryArray = [
   {

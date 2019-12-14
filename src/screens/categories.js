@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, FlatList} from 'react-native';
 import {categoryArray} from '../utils/constants';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import Admob from '../components/admob';
 
 const Category = props => {
   const [loading, setLoading] = React.useState(false);
@@ -31,22 +32,25 @@ const Category = props => {
 
 const Categories = props => {
   return (
-    <View style={styles.container}>
-      <View style={styles.gridStyle}>
-        <FlatList
-          data={categoryArray}
-          renderItem={({item}) => (
-            <Category
-              navigation={props.navigation}
-              uri={item.uri}
-              name={item.name}
-            />
-          )}
-          keyExtractor={item => item.name}
-          numColumns={3}
-        />
+    <>
+      <Admob />
+      <View style={styles.container}>
+        <View style={styles.gridStyle}>
+          <FlatList
+            data={categoryArray}
+            renderItem={({item}) => (
+              <Category
+                navigation={props.navigation}
+                uri={item.uri}
+                name={item.name}
+              />
+            )}
+            keyExtractor={item => item.name}
+            numColumns={3}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 

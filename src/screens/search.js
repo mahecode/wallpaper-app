@@ -6,6 +6,7 @@ import {useStateValue} from '../store/reducer';
 import {SET_SEARCH_WALLPAPERS} from '../store/state';
 import SearchBar from '../components/search-bar';
 import ImageGrid from '../components/image-grid';
+import Admob from '../components/admob';
 
 const Search = props => {
   const [loading, setLoading] = React.useState(false);
@@ -46,6 +47,7 @@ const Search = props => {
           navigation={props.navigation}
         />
       )}
+      <Admob />
     </>
   );
 };

@@ -15,7 +15,7 @@ const colors = {
   background2: '#21D4FD',
 };
 
-const slideHeight = height - height / 3;
+const slideHeight = height - height / 2.7;
 const slideWidth = wp(75);
 const itemHorizontalMargin = wp(2);
 
